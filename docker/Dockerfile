@@ -8,14 +8,14 @@ ADD ${JAR_FILE} phonebook.jar
 ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/phonebook.jar"]
 
 # Set the working directory to /app
-WORKDIR /phonebookapp
+WORKDIR /phonebook
 
 # Copy the current directory contents into the container at /app
-ADD . /phonebookapp
+ADD . /phonebook
 
 # Install any needed packages specified in requirements.txt
-RUN pip install --trusted-host pypi.python.org -r requirements.txt
-#RUN -it --rm dockerfile/java
+#RUN echo install --trusted-host pypi.python.org -r requirements.txt
+#RUN bash -c 'touch /phonebook.jar'
 
 # Make port 80 available to the world outside this container
 EXPOSE 80
