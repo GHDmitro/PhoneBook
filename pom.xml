@@ -188,6 +188,7 @@
 					<buildArgs>
 						<JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
 					</buildArgs>
+					<executable>true</executable>
 				</configuration>
 
 				<executions>
