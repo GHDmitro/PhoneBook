@@ -1,5 +1,7 @@
 package phonebookpac.assertsTests;
 
+import groovy.util.logging.Slf4j;
+import org.apache.log4j.Logger;
 import org.junit.Test;
 import phonebookpac.PhoneBookApplicationTests;
 import phonebookpac.model.Account;
@@ -16,10 +18,15 @@ import static org.mockito.Mockito.*;
 /**
  * Created by Dmytro Tymoshenko and Serhiy Romanenko on 16.11.17.
  */
+
+@Slf4j
 public class ModelsTest extends PhoneBookApplicationTests {
+
+    Logger logger = Logger.getLogger(ModelsTest.class);
 
     @Test
     public void testModels() {
+
 
         String expectedName = "name";
         String expectedSurname = "surName";
@@ -35,8 +42,8 @@ public class ModelsTest extends PhoneBookApplicationTests {
 
         assertTrue(account.getPhoneBook().contains(record));
 
+        logger.info("testModels");
     }
-
 
     @Test
     public void testMockitoModel() {
@@ -50,6 +57,7 @@ public class ModelsTest extends PhoneBookApplicationTests {
         assertEquals(mockAccount.getPhoneBook().size(), 2);
 
         verify(mockAccount, times(2)).getPhoneBook();
+        logger.info("testMockitoModel");
     }
 
 

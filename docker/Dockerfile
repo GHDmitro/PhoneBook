@@ -7,10 +7,10 @@ ARG JAR_FILE
 ADD ${JAR_FILE} phonebook.jar
 ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/phonebook.jar"]
 
-# Set the working directory to /app
+# Set the working directory to /phonebook
 WORKDIR /phonebook
 
-# Copy the current directory contents into the container at /app
+# Copy the current directory contents into the container at /phonebook
 ADD . /phonebook
 
 # Install any needed packages specified in requirements.txt
