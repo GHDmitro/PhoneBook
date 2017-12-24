@@ -1,14 +1,25 @@
 # Use an official Python runtime as a parent image
 #FROM python:2.7-slim
-FROM openjdk:8-jdk-alpine
 
+
+#FROM openjdk:8-jdk-alpine
+#VOLUME /tmp
+#ARG JAR_FILE
+#ADD ${JAR_FILE} phonebook.jar
+#ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/phonebook.jar"]
+
+FROM openjdk:8-jdk-alpine
 VOLUME /tmp
 ARG JAR_FILE
 ADD ${JAR_FILE} phonebook.jar
-#ADD phonebook.jar phonebook.jar
-
-#RUN bash -c 'touch /phonebook.jar'
 ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/phonebook.jar"]
+
+#FROM java:8
+#VOLUME /tmp
+#ADD phonebook.jar phonebook.jar
+#RUN bash -c 'touch /phonebook.jar'
+#ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/phonebook.jar"]
+
 
 # Set the working directory to /phonebook
 #WORKDIR /phonebook
