@@ -3,12 +3,15 @@
 FROM openjdk:8-jdk-alpine
 
 VOLUME /tmp
-ARG JAR_FILE
-ADD ${JAR_FILE} phonebook.jar
+#ARG JAR_FILE
+#ADD ${JAR_FILE} phonebook.jar
+ADD phonebook.jar phonebook.jar
+
+RUN bash -c 'touch /phonebook.jar'
 ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/phonebook.jar"]
 
 # Set the working directory to /phonebook
-WORKDIR /phonebook
+#WORKDIR /phonebook
 
 # Copy the current directory contents into the container at /phonebook
 #ADD . /phonebook
