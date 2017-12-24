@@ -184,18 +184,18 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 
-				<configuration>
-					<executable>true</executable>
-				</configuration>
-				<executions>
-					<execution>
-						<id>dev</id>
-						<phase>package</phase>
-						<goals>
-							<goal>build-info</goal>
-						</goals>
-					</execution>
-				</executions>
+				<!--<configuration>-->
+					<!--<executable>true</executable>-->
+				<!--</configuration>-->
+				<!--<executions>-->
+					<!--<execution>-->
+						<!--<id>dev</id>-->
+						<!--<phase>package</phase>-->
+						<!--<goals>-->
+							<!--<goal>build-info</goal>-->
+						<!--</goals>-->
+					<!--</execution>-->
+				<!--</executions>-->
 			</plugin>
 
 			<plugin>
