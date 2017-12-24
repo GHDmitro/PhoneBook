@@ -7,7 +7,7 @@ ARG JAR_FILE
 ADD ${JAR_FILE} phonebook.jar
 #ADD phonebook.jar phonebook.jar
 
-RUN bash -c 'touch /phonebook.jar'
+#RUN bash -c 'touch /phonebook.jar'
 ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/phonebook.jar"]
 
 # Set the working directory to /phonebook
