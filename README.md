@@ -1,5 +1,28 @@
 For boot this project you must have java on PC
 
+To run application by docker
+
+   git clone https://github.com/GHDmitro/phonebook.git
+   cd phonebook
+   
+   mvn clean package docker:build
+   
+   
+   docker run --name demo-mysql -e MYSQL_ROOT_PASSWORD=password -e
+    MYSQL_DATABASE=demo -e MYSQL_USER=demo_user -e 
+    MYSQL_PASSWORD=demo_pass -d mysql:5.6
+   
+   
+   docker logs demo-mysql
+   
+   
+   docker run -p 8080:8080 --name phonebookapp --link demo-mysql:mysql -d dtimosh96/phonebook
+   
+   docker logs phonebookapp
+   
+   <!--./mvnw install dockerfile:build-->
+   
+
 To run this application by java in terminal:
     java -jar target/phonebook-1.jar
     
