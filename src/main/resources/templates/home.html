@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+    <link href="../static/css/bootstrap.css" th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css"/>
+    <!--<link href="../static/css/dataTables.bootstrap.min.css" th:href="@{/css/dataTables.bootstrap.min.css}"-->
+    <!--rel="stylesheet" type="text/css"/>-->
+    <link href="../static/css/font-awesome.css" th:href="@{/css/font-awesome.css}" rel="stylesheet" type="text/css">
+    <link href="../static/css/bootstrap-formhelpers.css" th:href="@{/css/bootstrap-formhelpers.css}" rel="stylesheet" type="text/css">
+    <link href="../static/css/home.css" th:href="@{/css/home.css}" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+<nav class="navbar navbar-fixed-top navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <span class="navbar-brand">Phone book</span>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+            <ul class="nav navbar-nav navbar-left">
+                <li>
+                <a class="navbar-link text-center" href="#" id="navbar-brand-click"><b class="text-center">All records</b></a>
+                </li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><a class="navbar-link text-center" href="/logout" th:href="@{/logout}">
+                    <span class="glyphicon glyphicon-log-out"><b class="small">exit</b></span></a>
+                </li>
+            </ul>
+        </div>
+
+    </div><!-- /.container -->
+</nav><!-- /.navbar -->
+
+<div class="container">
+
+    <div class="row row-offcanvas row-offcanvas-right">
+
+        <div class="col-xs-12 col-sm-4 col-sm-push-8  sidebar-offcanvas" id="sidebar">
+            <div class="panel-group center-block">
+                <div class="page-header">Filter your book</div>
+                <form role="form" id="sortForm">
+                    <div class="panel-body">
+                        <div class="form-group row center-block">
+                            <ul>
+                                <li>
+                                    <div class="input-group form-control c-search">
+                                        <input type="text" class="form-control" id="search1" placeholder="name">
+
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="input-group form-control c-search">
+                                        <input type="text" class="form-control" id="search2" placeholder="surname">
+
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="input-group form-control c-search">
+                                        <input type="text" class="input-medium bfh-phone form-control"
+                                               data-format="+380 (dd) ddd-dd-dd" id="search3" placeholder="mobile number">
+
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="form-group row">
+
+                            <div class="col-xs-12 col-sm-offset-2 col-sm-10">
+
+                                <button type="button" class="btn btn-lg btn-success btn-block" id="filterButton">Filter</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+
+        <div class="col-xs-12 col-sm-offset-1 col-sm-7 col-sm-pull-4">
+            <div class="panel panel-default">
+                <div class="panel-heading c-list">
+                    <span class="title">Contacts</span>
+                    <ul class="pull-right c-controls">
+                        <li><a href="#cant-do-all-the-work-for-you" data-toggle="tooltip" data-placement="top"
+                               title="Add Contact"><i class="glyphicon glyphicon-plus"></i></a></li>
+                    </ul>
+                </div>
+
+                <div class="panel panel-body">
+
+                    <ul class="list-group" id="contact-list"></ul>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div><!--/.sidebar-offcanvas-->
+</div><!--/row-->
+
+<hr>
+
+<footer>
+    <p>&copy; 2017 Phonebook, Inc.</p>
+</footer>
+
+
+<div id="cant-do-all-the-work-for-you" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
+     aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+
+            <div class="panel-default">
+                <div class="panel-heading">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h3 class="panel-title" id="#mySmallModalLabel">Set data for new record here
+                        <small class="glyphicon glyphicon-hand-down"></small></h3>
+                </div>
+                <div class="panel-body">
+                    <form class="form-group" id="idAddForm" role="form" >
+
+                        <div class="form-group row">
+                            <label for="name-input" class="col-2 col-form-label">Name</label>
+                            <div class="col-10">
+                                <input class="form-control" type="text" id="name-input" placeholder="Name" minlength="4" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="name-input" class="col-2 col-form-label">Surname</label>
+                            <div class="col-10">
+                                <input class="form-control" type="text" id="surname-input" minlength="4" placeholder="Surname"
+                                       required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="lastName-input" class="col-2 col-form-label">Last name</label>
+                            <div class="col-10">
+                                <input class="form-control" type="text" id="lastName-input" placeholder="Last Name" minlength="4"
+                                       required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="mobileNumber-input" class="col-2 col-form-label">Mobile number</label>
+                            <div class="col-10">
+                                <input type="text" class="input-medium bfh-phone form-control" data-format="+380 (dd) ddd-dd-dd"
+                                       id="mobileNumber-input" pattern=".{19}"
+                                       placeholder="Mobile number" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="homeNumber-input" class="col-2 col-form-label">Home number</label>
+                            <div class="col-10">
+                                <input type="text" class="input-medium bfh-phone form-control" data-format="+38044 ddd-dd-dd" pattern=".{7}|.{16}"
+                                       id="homeNumber-input"
+                                       placeholder="Home number">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="email-input" class="col-2 col-form-label">Email</label>
+                            <div class="col-10">
+                                <input class="form-control" name="email"
+                                       pattern="[A-Za-z0-9._%+-]{3,}@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" type="email" id="email-input" placeholder="Email">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="address-input" class="col-2 col-form-label">Address</label>
+                            <div class="col-10">
+                                <input class="form-control" type="text" id="address-input" placeholder="Address">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <button type="submit" class="btn btn-lg btn-primary btn-block" id="addRecordButton">
+                                Confirm <span class="glyphicon glyphicon-saved"></span>
+                            </button>
+                        </div>
+
+
+                    </form>
+                </div>
+
+            </div>
+
+
+            <!--</div>-->
+        </div>
+    </div>
+</div>
+
+
+<div id="changeBlockModal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
+     aria-labelledby="mySmallLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+
+            <div class="panel-default">
+                <div class="panel-heading">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h3 class="panel-title" id="#mySmallLabel">Change record`s data here
+                        <small class="glyphicon glyphicon-hand-down"></small></h3>
+                </div>
+                <div class="panel-body">
+
+                    <form class="form-group" id="idChangeForm" role="form">
+
+                        <div class="form-group row">
+                            <label for="name-change" class="col-4 col-form-label">Name</label>
+                            <div class="col-8">
+                                <input class="form-control" type="text" id="name-change"  minlength="4" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="name-change" class="col-2 col-form-label" >Surname:</label>
+                            <div class="col-2">
+                                <input class="form-control" type="text" id="surname-change" minlength="4" placeholder="Surname"
+                                       required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="lastName-change" class="col-2 col-form-label">Last name</label>
+                            <div class="col-10">
+                                <input class="form-control" type="text" id="lastName-change" placeholder="Last Name" minlength="4"
+                                       required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="mobileNumber-change" class="col-2 col-form-label">Mobile number</label>
+                            <div class="col-10">
+                                <input type="text" class="input-medium bfh-phone form-control" data-format="+380 (dd) ddd-dd-dd"
+                                       id="mobileNumber-change" pattern=".{19}"
+                                       placeholder="Mobile number" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="homeNumber-change" class="col-2 col-form-label">Home number</label>
+                            <div class="col-10">
+                                <input type="text" class="input-medium bfh-phone form-control" data-format="+38044 ddd-dd-dd" pattern=".{7}|.{16}"
+                                       id="homeNumber-change"
+                                       placeholder="Home number">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="email-change" class="col-2 col-form-label">Email</label>
+                            <div class="col-10">
+                                <input class="form-control" name="email"
+                                       pattern="[A-Za-z0-9._%+-]{3,}@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" type="email" id="email-change" placeholder="Email">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="address-change" class="col-2 col-form-label">Address</label>
+                            <div class="col-10">
+                                <input class="form-control" type="text" id="address-change" placeholder="Address">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <button type="submit" class="btn btn-lg btn-primary btn-block" id="changeRecordButton">
+                                Confirm changes <span class="glyphicon glyphicon-saved"></span>
+                            </button>
+                        </div>
+
+
+                    </form>
+                </div>
+
+            </div>
+
+
+            <!--</div>-->
+        </div>
+    </div>
+</div>
+
+
+<script src="../static/js/lib/jquery.js" th:src="@{/js/lib/jquery.js}"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="../static/js/lib/bootstrap.min.js" th:src="@{/js/lib/bootstrap.min.js}"></script>
+<script src="../static/js/lib/bootstrap-formhelpers-phone.js" th:src="@{/js/lib/bootstrap-formhelpers-phone.js}"></script>
+<script src="../static/js/lib/jquery.validate.js" th:src="@{/js/lib/jquery.validate.js}"></script>
+<script src="../static/js/lib/jquery.form.js" th:src="@{/js/lib/jquery.form.js}"></script>
+<script src="../static/js/lib/additional-methods.js" th:src="@{/js/lib/additional-methods.js}"></script>
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js" th:href="@{https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js}"></script>-->
+<!--<script type="text/javascript">-->
+    <!--var jQuery = $.noConflict(true);  // <- this-->
+<!--</script>-->
+<script th:inline="javascript">
+    var accountId = [[${accountId}]];
+//    console.log(accountId);
+    //        $('.panel').append("Добро пожаловать ->  "+accountId);
+</script>
+
+
+<script src="../static/js/home.js" th:src="@{/js/home.js}"></script>
+
+</body>
+</html>
