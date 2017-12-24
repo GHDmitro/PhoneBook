@@ -1,4 +1,4 @@
-CREATE DATABASE IF NOT EXISTS bookphone;
+CREATE DATABASE IF NOT EXISTS demo;
 
 alter table account_phone_book drop foreign key FK4mlhr6ocit674rapk0ojagodb;
 alter table account_phone_book drop foreign key FK7ylxhv1ir64601b4upqakikop;
