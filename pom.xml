@@ -211,9 +211,9 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 
-				<!--<configuration>-->
-					<!--<executable>true</executable>-->
-				<!--</configuration>-->
+				<configuration>
+					<executable>true</executable>
+				</configuration>
 				<!--<executions>-->
 					<!--<execution>-->
 						<!--&lt;!&ndash;<id>dev</id>&ndash;&gt;-->

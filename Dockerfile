@@ -1,12 +1,28 @@
 # Use an official Python runtime as a parent image
 #FROM python:2.7-slim
 
+FROM openjdk:8
+ENV MYSQL_USER=mysql \
+    MYSQL_DATA_DIR=/var/lib/mysql \
+    MYSQL_RUN_DIR=/run/mysqld \
+    MYSQL_LOG_DIR=/var/log/mysql
 
-FROM openjdk:8-jdk-alpine
-VOLUME /tmp
-ARG JAR_FILE
-ADD ${JAR_FILE} phonebook.jar
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/phonebook.jar"]
+RUN apt-get update \
+ && DEBIAN_FRONTEND=noninteractive apt-get install -y mysql-server \
+ && rm -rf ${MYSQL_DATA_DIR} \
+ && rm -rf /var/lib/apt/lists/*
+
+#RUN apt-get update \
+#    && DEBIAN_FRONTEND=noninteractive apt-get install -y mysql-server
+EXPOSE 3306/tcp
+VOLUME ["${MYSQL_DATA_DIR}", "${MYSQL_RUN_DIR}"]
+
+#VOLUME /tmp
+#ARG JAR_FILE
+#${JAR_FILE}
+#ADD ./target/phonebook-1.jar phonebook.jar
+#ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/phonebook.jar"]
+
 
 #FROM openjdk:8-jdk-alpine
 #VOLUME /tmp
