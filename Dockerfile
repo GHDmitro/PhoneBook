@@ -2,7 +2,7 @@
 #FROM python:2.7-slim
 
 
-#FROM openjdk:8-jdk-alpine
+FROM openjdk:8-jdk-alpine
 VOLUME /tmp
 ARG JAR_FILE
 ADD ${JAR_FILE} phonebook.jar
