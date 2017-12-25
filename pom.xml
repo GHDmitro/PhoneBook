@@ -194,15 +194,15 @@
 				<!--<configuration>-->
 					<!--<executable>true</executable>-->
 				<!--</configuration>-->
-				<!--<executions>-->
-					<!--<execution>-->
-						<!--&lt;!&ndash;<id>dev</id>&ndash;&gt;-->
-						<!--<phase>package</phase>-->
-						<!--<goals>-->
-							<!--<goal>build-info</goal>-->
-						<!--</goals>-->
-					<!--</execution>-->
-				<!--</executions>-->
+				<executions>
+					<execution>
+						<!--<id>dev</id>-->
+						<phase>package</phase>
+						<goals>
+							<goal>build-info</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 
 
