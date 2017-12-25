@@ -23,6 +23,8 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 		<docker.image.prefix>dtimosh96</docker.image.prefix>
+		<project.build.directory>/</project.build.directory>
+		<project.build.finalName>phonebook</project.build.finalName>
 	</properties>
 
 	<dependencies>
@@ -206,27 +208,44 @@
 			</plugin>
 
 
+			<!--<plugin>-->
+						<!--<groupId>com.spotify</groupId>-->
+						<!--<artifactId>dockerfile-maven-plugin</artifactId>-->
+						<!--<version>1.3.6</version>-->
+						<!--<configuration>-->
+							<!--<repository>${docker.image.prefix}/${project.artifactId}</repository>-->
+							<!--<buildArgs>-->
+								<!--<JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>-->
+							<!--</buildArgs>-->
+						<!--</configuration>-->
+						<!--<executions>-->
+							<!--<execution>-->
+								<!--<id>default</id>-->
+								<!--<phase>install</phase>-->
+								<!--<goals>-->
+								<!--<goal>build</goal>-->
+									<!--<goal>push</goal>-->
+								<!--</goals>-->
+							<!--</execution>-->
+						<!--</executions>-->
+					<!--</plugin>-->
+
 			<plugin>
-						<groupId>com.spotify</groupId>
-						<artifactId>dockerfile-maven-plugin</artifactId>
-						<version>1.3.6</version>
-						<configuration>
-							<repository>${docker.image.prefix}/${project.artifactId}</repository>
-							<buildArgs>
-								<JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
-							</buildArgs>
-						</configuration>
-						<executions>
-							<execution>
-								<id>default</id>
-								<phase>install</phase>
-								<goals>
-								<goal>build</goal>
-									<goal>push</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>0.4.6</version>
+				<configuration>
+					<imageName>phonedocker</imageName>
+					<dockerDirectory>/</dockerDirectory>
+					<resources>
+						<resource>
+							<targetPath>/</targetPath>
+							<directory>${project.build.directory}</directory>
+							<include>${project.build.finalName}.jar</include>
+						</resource>
+					</resources>
+				</configuration>
+			</plugin>
 
 					<!--<plugin>-->
 						<!--<groupId>com.spotify</groupId>-->
