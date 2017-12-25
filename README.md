@@ -5,12 +5,15 @@ To run application by docker
    git clone https://github.com/GHDmitro/phonebook.git
    cd phonebook
    
-   mvn clean package docker:build
+   mvn clean package 
    
+   docker:build
    
-   docker run --name demo-mysql -e MYSQL_ROOT_PASSWORD=password -e
-    MYSQL_DATABASE=demo -e MYSQL_USER=demo_user -e 
-    MYSQL_PASSWORD=demo_pass -d mysql:5.6
+   docker run -it phonebook:1.0
+   
+   <!--docker run --name demo-mysql -e MYSQL_ROOT_PASSWORD=password -e-->
+    <!--MYSQL_DATABASE=demo -e MYSQL_USER=demo_user -e -->
+    <!--MYSQL_PASSWORD=demo_pass -d mysql:5.6-->
    
    
    docker logs demo-mysql
